@@ -14,17 +14,25 @@ import java.util.Optional;
 @Repository
 public class ContentCollectionRepository {
 
-    private final List<Content> content = new ArrayList<>();
+    private final List<Content> contentList = new ArrayList<>();
 
     public ContentCollectionRepository() {
     }
 
+    // find all method creation
     public List<Content> findAll() {
-        return content;
+        return contentList;
     }
 
+    // findById method creation
     public Optional<Content> findById(Integer id) {
-        return content.stream().filter(c -> c.id().equals(id)).findFirst();
+        return contentList.stream().filter(c -> c.id().equals(id)).findFirst();
+    }
+
+    // add a content to list method creation
+    public void save(Content content) {
+        contentList.removeIf(c -> c.id().equals(content.id()));//when we update, it will remove the existing id
+        contentList.add(content);// and add new content with the same id
     }
 
     @PostConstruct
@@ -37,6 +45,15 @@ public class ContentCollectionRepository {
                 LocalDateTime.now(),
                 null,
                 "");
-        content.add(c);
+        contentList.add(c);
+    }
+
+    // existById() to check if content's id exists
+    public boolean existById(Integer id) {
+        return contentList.stream().filter(c -> c.id().equals(id)).count() == 1;
+    }
+
+    public void delete(Integer id) {
+        contentList.removeIf(c -> c.id().equals(id));
     }
 }
