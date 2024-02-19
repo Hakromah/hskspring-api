@@ -9,9 +9,9 @@ POST http://localhost:8080/api/content
 Content-Type: application/json
 
 {
-  "id": 3,
-  "title": "My Third Blog Post",
-  "desc": "My third blog post",
+  "id": 2,
+  "title": "My Second Post",
+  "desc": "my second post",
   "status": "IDEA",
   "contentType": "ARTICLE",
   "dateCreated": "2024-02-18T17:15:25.2044481",
